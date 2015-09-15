@@ -15,6 +15,7 @@ var handles []*rbtree.Node
 
 func main() {
 	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "%s - Remove duplicated lines and keep the input order for rest of lines\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "Usage: %s [filename]\n", os.Args[0])
 	}
 	flag.Parse()
