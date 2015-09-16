@@ -46,7 +46,7 @@ func main() {
 	}
 
 	for _, handle := range handles {
-		s := t.Delete(handle).(string)
+		s := handle.Value().(string)
 		fmt.Println(s)
 	}
 }
