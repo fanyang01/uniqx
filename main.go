@@ -11,8 +11,6 @@ import (
 	"github.com/fanyang01/rbtree"
 )
 
-var handles []*rbtree.Node
-
 func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "%s - Remove duplicated lines and keep the input order for rest of lines\n", os.Args[0])
@@ -37,16 +35,12 @@ func main() {
 	t := rbtree.New(rbtree.CompareString)
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
-		if handle, ok := t.Insert(scanner.Text()); ok {
-			handles = append(handles, handle)
+		line := scanner.Text()
+		if _, ok := t.Insert(line); ok {
+			fmt.Println(line)
 		}
 	}
 	if err := scanner.Err(); err != nil {
 		log.Fatal("reading input:", err)
-	}
-
-	for _, handle := range handles {
-		s := handle.Value().(string)
-		fmt.Println(s)
 	}
 }
